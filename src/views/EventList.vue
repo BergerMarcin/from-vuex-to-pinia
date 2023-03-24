@@ -1,8 +1,15 @@
 <script>
 import EventCard from '../components/EventCard.vue'
+import { useEventStore } from "../stores/EventStore"
+
 export default {
   components: {
     EventCard
+  },
+  setup() {
+    return {
+      eventStore: useEventStore()
+    }
   },
   created() {
     this.$store.dispatch('fetchEvents').catch(error => {
@@ -13,7 +20,7 @@ export default {
     })
   },
   computed: {
-    events() {
+    allEvents() {
       return this.$store.state.events
     }
   }
@@ -21,9 +28,9 @@ export default {
 </script>
 
 <template>
-  <h1>Events for Good</h1>
+  <h1>{{ eventStore.numberOfEvents }} Events for Good</h1>
   <div class="events">
-    <EventCard v-for="event in events" :key="event.id" :event="event" />
+    <EventCard v-for="event in allEvents" :key="event.id" :event="event" />
   </div>
 </template>
 

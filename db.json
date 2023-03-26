@@ -39,6 +39,16 @@
       "date": "Today",
       "time": "Now",
       "organizer": "Adam Jahr"
+    },
+    {
+      "id": "40fb4cbf-f431-4ffe-8ecb-a33dc2ef7434",
+      "category": "",
+      "title": "Test 2",
+      "description": "Test 2 Description",
+      "location": "Błonie",
+      "date": "Tomorrow",
+      "time": "Evening",
+      "organizer": "Marcin Berger"
     }
   ]
 }

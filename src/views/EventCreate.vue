@@ -1,9 +1,11 @@
 <script>
 import { v4 as uuidv4 } from 'uuid'
+import { useEventStore } from "../stores/EventStore"
 
 export default {
   data() {
     return {
+      eventStore: useEventStore(),
       categories: [
         'sustainability',
         'nature',
@@ -32,20 +34,19 @@ export default {
         id: uuidv4(),
         organizer: this.$store.state.user
       }
-      this.$store
-        .dispatch('createEvent', event)
-        .then(() => {
+      this.eventStore.createEvent(event)
+        .then(() =>
           this.$router.push({
             name: 'EventDetails',
             params: { id: event.id }
           })
-        })
-        .catch(error => {
+        )
+        .catch(error =>
           this.$router.push({
             name: 'ErrorDisplay',
-            params: { error: error }
+            error
           })
-        })
+        )
     }
   }
 }

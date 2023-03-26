@@ -10,12 +10,37 @@ export const useEventStore = defineStore("event", {
   },
   getters: {
     numberOfEvents() {
-      return this.events.length
+      return this.events.length // NOTE: `this` refers to state
     }
   },
   actions: {
-    addEvent(event) {
-      this.events.push(event);
+    // NOTE: Actions' names as a CRUD-action
+    createEvent(event) {
+      return EventService.postEvent(event)
+        .then(() => this.events.push(event))
+        .catch(err => {
+          throw err
+        })
+    },
+    readEvents() {
+      return EventService.getEvents()
+        .then(resp => this.events = resp.data)
+        .catch(err => {
+          throw err
+        })
+    },
+    readEvent(id) {
+      const existingEvent = this.events.find(event => event.id === id)
+      if (existingEvent) {
+        this.event = existingEvent;
+        return Promise.resolve()
+      } else {
+        return EventService.getEvent(id)
+          .then(resp => this.event = resp.data)
+          .catch(err => {
+            throw err
+          })
+      }
     }
   }
 });

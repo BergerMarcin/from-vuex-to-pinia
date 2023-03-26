@@ -12,16 +12,16 @@ export default {
     }
   },
   created() {
-    this.$store.dispatch('fetchEvents').catch(error => {
-      this.$router.push({
-        name: 'ErrorDisplay',
-        params: { error: error }
-      })
-    })
+    this.eventStore.readEvents().catch(error =>
+        this.$router.push({
+          name: 'ErrorDisplay',
+          params: { error }
+        })
+    )
   },
   computed: {
     allEvents() {
-      return this.$store.state.events
+      return this.eventStore.events;
     }
   }
 }

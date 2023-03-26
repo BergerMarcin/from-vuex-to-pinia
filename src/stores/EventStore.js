@@ -1,6 +1,8 @@
 import { defineStore } from "pinia"
 import EventService from '../services/EventService.js'
 
+/* Pinia store module for Event
+   Option API */
 export const useEventStore = defineStore("event", {
   state() {
     return {

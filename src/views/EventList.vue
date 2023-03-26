@@ -1,6 +1,7 @@
 <script>
 import EventCard from '../components/EventCard.vue'
 import { useEventStore } from "../stores/EventStore"
+import { useUserStore } from "../stores/UserStore"
 
 export default {
   components: {
@@ -8,7 +9,8 @@ export default {
   },
   setup() {
     return {
-      eventStore: useEventStore()
+      eventStore: useEventStore(),
+      userStore: useUserStore()
     }
   },
   created() {
@@ -28,7 +30,7 @@ export default {
 </script>
 
 <template>
-  <h1>{{ eventStore.numberOfEvents }} Events for Good</h1>
+  <h1>{{ userStore.firstName }}, your {{ eventStore.numberOfEvents }} events for Good!</h1>
   <div class="events">
     <EventCard v-for="event in allEvents" :key="event.id" :event="event" />
   </div>

@@ -1,11 +1,17 @@
 <script>
 import { v4 as uuidv4 } from 'uuid'
 import { useEventStore } from "../stores/EventStore"
+import { useUserStore } from "../stores/UserStore"
 
 export default {
-  data() {
+  setup() {
     return {
       eventStore: useEventStore(),
+      userStore: useUserStore()
+    }
+  },
+  data() {
+    return {
       categories: [
         'sustainability',
         'nature',
@@ -32,7 +38,7 @@ export default {
       const event = {
         ...this.event,
         id: uuidv4(),
-        organizer: this.$store.state.user
+        organizer: this.userStore.user,
       }
       this.eventStore.createEvent(event)
         .then(() =>

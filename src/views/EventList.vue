@@ -3,6 +3,7 @@ import EventCard from '../components/EventCard.vue'
 import { useEventStore } from "../stores/EventStore"
 import { useUserStore } from "../stores/UserStore"
 
+/* Composition API */
 export default {
   components: {
     EventCard
